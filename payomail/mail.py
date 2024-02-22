@@ -1,5 +1,5 @@
 from datetime import datetime
-from util.mail.strategy import EmailStrategy
+from payomail.strategy import EmailStrategy
 
 
 class EmailBuilder:
