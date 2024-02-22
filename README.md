@@ -38,11 +38,19 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Usage 🖥️
 
+## Installation via pip 📦
+
+PayoMail is available on PyPI, the Python Package Index. You can install it using pip:
+
+```bash
+pip install payomail
+```
+
 ```python
 # Your Python script
 
-from util.mail.mail import EmailBuilder
-from util.mail.strategy import  GmailStrategy
+from payomail.mail import EmailBuilder
+from payomail.strategy import IceWarpStrategy
 
 if __name__ == "__main__":
     # Creating and configuring an email using the builder pattern
