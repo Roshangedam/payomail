@@ -1,5 +1,8 @@
 # PayoMail - Open Source Email Sending Utility ✉️
 
+<img src="https://github.com/Roshangedam/payomail/blob/master/payomail/images/icon.png" alt="PayoMail Icon" width="200">
+
+
 PayoMail is an open-source Python utility for sending emails with different email providers. It provides a flexible architecture supporting various email strategies and a convenient interface for configuring and sending emails.
 
 ## Features 🚀
