@@ -1,4 +1,4 @@
-```markdown
+
 # PayoMail - Open Source Email Sending Utility
 
 PayoMail is an open-source Python utility for sending emails with different email providers. It provides a flexible architecture supporting various email strategies and a convenient interface for configuring and sending emails.
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     # If there was a failure, you can also print the error message
     if response['status'] == 'Failure':
         print(f"Error Message: {response['error_message']}")
-```
+
 
 ## Contributing
 
