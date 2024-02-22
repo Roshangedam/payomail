@@ -36,8 +36,6 @@ Follow these instructions to get a copy of the project up and running on your lo
     pip install -r requirements.txt
     ```
 
-### Usage 🖥️
-
 ## Installation via pip 📦
 
 PayoMail is available on PyPI, the Python Package Index. You can install it using pip:
@@ -45,12 +43,13 @@ PayoMail is available on PyPI, the Python Package Index. You can install it usin
 ```bash
 pip install payomail
 ```
+### Usage 🖥️
 
 ```python
 # Your Python script
 
 from payomail.mail import EmailBuilder
-from payomail.strategy import IceWarpStrategy
+from payomail.strategy import GmailStrategy
 
 if __name__ == "__main__":
     # Creating and configuring an email using the builder pattern
