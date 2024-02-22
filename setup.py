@@ -11,3 +11,14 @@ setup(
     description='mailing utilty',
     url='https://github.com/Roshangedam/payomail',
 )
+
+
+# for add in publish pacakge use commands
+
+# py setup.py sdist
+
+# twine upload dist/*
+
+# give your api token key
+
+# done
