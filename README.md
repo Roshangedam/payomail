@@ -41,7 +41,8 @@ Follow these instructions to get a copy of the project up and running on your lo
 ```python
 # Your Python script
 
-from util.mail.email import EmailBuilder, GmailStrategy
+from util.mail.mail import EmailBuilder
+from util.mail.strategy import  GmailStrategy
 
 if __name__ == "__main__":
     # Creating and configuring an email using the builder pattern
@@ -71,6 +72,7 @@ if __name__ == "__main__":
     # If there was a failure, you can also print the error message
     if response['status'] == 'Failure':
         print(f"Error Message: {response['error_message']}")
+
 
 ```
 ## Contributing 🤝
