@@ -1,28 +1,27 @@
-
-# PayoMail - Open Source Email Sending Utility
+# PayoMail - Open Source Email Sending Utility ✉️
 
 PayoMail is an open-source Python utility for sending emails with different email providers. It provides a flexible architecture supporting various email strategies and a convenient interface for configuring and sending emails.
 
-## Features
+## Features 🚀
 
 - **Modular Architecture:** Choose from different email strategies like Gmail, IceWarp, etc.
 - **Builder Pattern:** Easily configure and customize emails using a builder pattern.
 - **Detailed Responses:** Get detailed responses, including status, sender, recipient, subject, and timestamp.
 
-## Getting Started
+## Getting Started 🛠️
 
 Follow these instructions to get a copy of the project up and running on your local machine.
 
-### Prerequisites
+### Prerequisites 📋
 
 - Python 3.x
 
-### Installation
+### Installation 📦
 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/payomail.git
+    git https://github.com/Roshangedam/payomail.git
     ```
 
 2. Navigate to the project directory:
@@ -37,7 +36,7 @@ Follow these instructions to get a copy of the project up and running on your lo
     pip install -r requirements.txt
     ```
 
-### Usage
+### Usage 🖥️
 
 ```python
 # Your Python script
@@ -74,19 +73,16 @@ if __name__ == "__main__":
         print(f"Error Message: {response['error_message']}")
 
 
-## Contributing
+## Contributing 🤝
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-## License
+## License 📄
 
-This project is licensed under  - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the  License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## Acknowledgments
+## Acknowledgments 🙌
 
 - Hat tip to anyone whose code was used
 - Inspiration
 - etc.
-```
-
-Make sure to replace placeholder values like "yourusername," "your_email@gmail.com," and "your_app_password" with the appropriate information. Update the "Acknowledgments" section with any credits or acknowledgments you'd like to include.
