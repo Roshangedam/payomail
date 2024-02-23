@@ -61,11 +61,13 @@ if __name__ == "__main__":
         .build()
     )
 
-    # Setting subject, body, and recipient after build
+    # Setting subject, body, and recipient after build with adding attachment
     email.set_subject("Test Email")
     email.set_body("This is a test email sent from Python.")
     email.set_recipient("recipient@example.com")
-
+    roshan.attach_file('payomail/images/icon.png')
+    roshan.attach_file('https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg')
+    roshan.attach_file('https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4')
     # Sending the configured email and capturing the response
     response = email.send()
 
