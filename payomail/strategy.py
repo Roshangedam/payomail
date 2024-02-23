@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from email import encoders
 from email.mime.base import MIMEBase
+import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -21,22 +22,21 @@ class GmailStrategy(EmailStrategy):
         server.login(sender_email, app_password)
         self._send_email(server, sender_email, recipient_email, subject, body, attachments)
 
-    def _send_email(self, server, sender_email, recipient_email, subject, body, attachments=None):
+    def _send_email(self, server, sender_email, recipient_email, subject, body, attachments):
         message = MIMEMultipart()
         message["From"] = sender_email
         message["To"] = recipient_email
         message["Subject"] = subject
         message.attach(MIMEText(body, "plain"))
 
-        if attachments:
-            for attachment in attachments:
-                with open(attachment, "rb") as file:
-                    part = MIMEApplication(file.read(), Name=basename(attachment))
-                part['Content-Disposition'] = f'attachment; filename="{basename(attachment)}"'
+        for attachment in attachments:
+            with open(attachment, "rb") as file:
+                part = MIMEApplication(file.read(), Name=os.path.split(attachment)[-1])
+                part['Content-Disposition'] = f'attachment; filename="{os.path.split(attachment)[-1]}"'
                 message.attach(part)
 
         server.sendmail(sender_email, recipient_email, message.as_string())
-
+        
 class IceWarpStrategy(EmailStrategy):
     def send_email(self, sender_email, app_password, recipient_email, subject, body, attachments):
         smtp_server = "mail.microproindia.com"
@@ -55,8 +55,8 @@ class IceWarpStrategy(EmailStrategy):
 
         for attachment in attachments:
             with open(attachment, "rb") as file:
-                part = MIMEApplication(file.read(), Name=attachment.split("/")[-1])
-                part['Content-Disposition'] = f'attachment; filename="{attachment.split("/")[-1]}"'
+                part = MIMEApplication(file.read(), Name=os.path.split(attachment)[-1])
+                part['Content-Disposition'] = f'attachment; filename="{os.path.split(attachment)[-1]}"'
                 message.attach(part)
 
         server.sendmail(sender_email, recipient_email, message.as_string())

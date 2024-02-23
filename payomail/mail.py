@@ -71,9 +71,9 @@ class Email:
                 print(f"Failed to attach file. Error message: {result['error_message']}")
             self.attachments.append(result['path'])
         else:
-            file_size = get_size_by_path(file_source)
-            if file_size > self.max_attachment_size_bytes:
-               print(f"Attachment size exceeds the maximum allowed size ({self.max_attachment_size_bytes} bytes).")               
+            result = get_size_by_path(file_source)
+            if result['size'] > self.max_attachment_size_bytes:
+               print(f"Failed to attach file. Error message: {result['error_message']}")
                file_source=''
             self.attachments.append(file_source)
         return self
@@ -86,16 +86,7 @@ class Email:
                     self.sender_email, self.app_password, self.recipient_email,
                     self.subject, self.body, self.attachments
                 )
-
-                temp_folder = os.path.join(os.getcwd(), 'payomail', 'temp')
-                for attachment in self.attachments:
-                    try:
-                        attachment_path = os.path.abspath(attachment)
-                        if os.path.commonpath([attachment_path, temp_folder]) == temp_folder:
-                            os.remove(attachment_path)
-                    except (FileNotFoundError, OSError):
-                        print(f"Error removing file: {attachment}")
-
+                self.clean_temp()
                 timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
                 response = {
                     'status': 'Success',
@@ -107,6 +98,7 @@ class Email:
                 return response
 
             except Exception as e:
+                self.clean_temp()
                 timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
                 response = {
                     'status': 'Failure',
@@ -140,3 +132,13 @@ class Email:
     def set_recipient(self, recipient_email):
         self.recipient_email = recipient_email
         return self
+    
+    def clean_temp(self):
+        temp_folder = os.path.join(os.getcwd(), 'payomail', 'temp')
+        for attachment in self.attachments:
+            try:
+                attachment_path = os.path.abspath(attachment)
+                if os.path.commonpath([attachment_path, temp_folder]) == temp_folder:
+                   os.remove(attachment_path)
+            except (FileNotFoundError, OSError):
+                   print(f"Error removing file: {attachment}")
