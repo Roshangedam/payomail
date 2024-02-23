@@ -64,7 +64,7 @@ if __name__ == "__main__":
         .build()
     )
 
-    # Set maximum attachment size
+    # Set maximum attachment size by default is 10mb
     roshan.set_max_attachment_size(10)
 
     # Set email subject
