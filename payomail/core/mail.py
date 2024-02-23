@@ -4,8 +4,9 @@ from datetime import datetime
 import os
 from typing import  Union
 from urllib.parse import urlparse
-from payomail.file import download_file,get_size_by_path
-from payomail.strategy import EmailStrategy
+from payomail.core.strategy import EmailStrategy
+from payomail.core.file import download_file, get_size_by_path
+from payomail.template.template import HTMLTemplate
 
 
 class EmailBuilder:
@@ -40,13 +41,8 @@ class EmailBuilder:
     def set_max_attachment_size(self, max_attachment_size_mb):
         self.email.set_max_attachment_size(max_attachment_size_mb)
         return self
-
+           
     def build(self):
-        # Process pending attachments before building the email
-        if self.pending_attachments:
-            self.set_attachments(self.pending_attachments)
-            self.pending_attachments = []  # reset pending attachments after processing
-
         return self.email
 
 
@@ -58,6 +54,7 @@ class Email:
         self.recipient_email = None
         self.subject = None
         self.body = None
+        self.html_content=None
         self.attachments = []
         self.max_attachment_size_bytes = default_max_attachment_size_mb * 1024 * 1024  # Default: 10 MB
 
@@ -84,7 +81,7 @@ class Email:
             try:
                 self.strategy.send_email(
                     self.sender_email, self.app_password, self.recipient_email,
-                    self.subject, self.body, self.attachments
+                    self.subject, self.body,self.html_content, self.attachments
                 )
                 self.clean_temp()
                 timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
@@ -142,3 +139,15 @@ class Email:
                    os.remove(attachment_path)
             except (FileNotFoundError, OSError):
                    print(f"Error removing file: {attachment}")
+   
+    def set_body_from_template(self, template):
+        """
+        Set the email body from a template.
+
+        Parameters:
+            template (Template): The template object containing the content.
+        """
+        if isinstance(template, HTMLTemplate):
+            # If the template is an HTML template, set the body accordingly
+            self.html_content = template.content
+        return self
