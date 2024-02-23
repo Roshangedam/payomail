@@ -7,7 +7,7 @@ setup(
     name='payomail',
     version='8.0.0',
     packages=find_packages(),
-    package_data={'': ['*.png']},  # Include all PNG files in the package
+    package_data={'': ['icon.png']},  # Include all PNG files in the package
     include_package_data=True,
     # Metadata
     project_urls={

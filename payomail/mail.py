@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from payomail.strategy import EmailStrategy
 
 
@@ -30,6 +30,13 @@ class EmailBuilder:
         self.email.body = body
         return self
 
+    def set_attachments(self, attachments):
+        if isinstance(attachments, list):
+            self.email.attachments.extend(attachments)
+        else:
+            self.email.attachments.append(attachments)
+        return self
+
     def build(self):
         return self.email
 
@@ -41,13 +48,14 @@ class Email:
         self.recipient_email = None
         self.subject = None
         self.body = None
+        self.set_attachments = []
 
     def send(self):
         if self.strategy:
             try:
                 # Send the email
                 self.strategy.send_email(
-                    self.sender_email, self.app_password, self.recipient_email, self.subject, self.body
+                    self.sender_email, self.app_password, self.recipient_email, self.subject, self.body, self.attachments
                 )
 
                 # Return success status and timestamp
@@ -86,6 +94,7 @@ class Email:
                 'timestamp': timestamp
             }
             return response
+
     def set_subject(self, subject):
         self.subject = subject
         return self
